@@ -1,0 +1,20 @@
+[Unit]
+Description=WireGuard SMS relay for Asterisk extension 7001
+Requires=wg-quick@wg-sip.service asterisk.service
+After=wg-quick@wg-sip.service asterisk.service
+
+[Service]
+Type=simple
+User=asterisk
+Group=asterisk
+ExecStart=/usr/bin/python3 /opt/sip-sms-relay/relay.py
+LoadCredential=ami.secret:/etc/asterisk/sms-relay.secret
+Restart=on-failure
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ReadWritePaths=/var/lib/sip-sms-relay
+
+[Install]
+WantedBy=multi-user.target

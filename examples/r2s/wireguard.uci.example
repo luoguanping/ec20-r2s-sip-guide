@@ -1,0 +1,13 @@
+# Merge these two sections into /etc/config/network. Do not replace the whole file.
+config interface 'wgsip'
+        option proto 'wireguard'
+        option private_key 'REPLACE_R2S_PRIVATE_KEY'
+        list addresses '10.77.38.2/30'
+
+config wireguard_wgsip 'sipvps'
+        option public_key 'REPLACE_VPS_PUBLIC_KEY'
+        option endpoint_host '203.0.113.10'
+        option endpoint_port '51820'
+        option persistent_keepalive '25'
+        option route_allowed_ips '1'
+        list allowed_ips '10.77.38.1/32'
